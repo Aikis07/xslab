@@ -37,7 +37,6 @@ export default {
     CoursesList,
     PersonalActions,
   },
-  middleware: ['router'],
   computed: {
     ...mapState(['user', 'courses']),
     formatDate() {

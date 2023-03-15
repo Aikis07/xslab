@@ -1,10 +1,9 @@
-export default async function ({ store, redirect }) {
-  try {
-    const statusCode = await store.dispatch('getUserToken')
-    if (statusCode.status !== 200) {
-      redirect('/sign-in')
-    }
-  } catch (error) {
+export default async function ({ app, store, redirect }) {
+  const token = app.$cookies.get('user')
+  if (store.state.user === null && token !== undefined) {
+    await store.dispatch('getUserToken')
+  }
+  if (store.state.user === null) {
     redirect('/sign-in')
   }
 }
